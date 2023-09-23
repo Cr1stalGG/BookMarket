@@ -7,5 +7,5 @@ public interface AdminService {
     void addAuthor(AuthorCreationDTO authorDTO);
     void deleteAuthor(String name);
     void addBook(BookCreationDTO bookDTO);
-    void removeBook(String name);
+    void deleteBook(String name);
 }

@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void removeBook(String name) {
+    public void deleteBook(String name) {
         bookRepository.deleteBookByName(name);
     }
 }
