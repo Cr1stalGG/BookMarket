@@ -1,11 +1,15 @@
 package by.grsu.bookMarket.entity.dto.convertor;
 
 import by.grsu.bookMarket.entity.Book;
+import by.grsu.bookMarket.entity.BoughtBook;
 import by.grsu.bookMarket.entity.dto.bookDTO.BookCreationDTO;
 import by.grsu.bookMarket.entity.dto.bookDTO.BookMainInfoDTO;
 import by.grsu.bookMarket.repository.AuthorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 
 @Component
@@ -31,6 +35,15 @@ public class BookDTOConvertor {
                 .author(authorDTOConvertor.convertEntityToDTO(book.getAuthor()))
                 .count(book.getCount())
                 .price(book.getCount())
+                .build();
+    }
+
+    public BoughtBook convertBookToBoughtBook(Book book){
+        return BoughtBook.builder()
+                .name(book.getName())
+                .description(book.getDescription())
+                .author(book.getAuthor())
+                .date(Date.valueOf(LocalDate.now()))
                 .build();
     }
 }

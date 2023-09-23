@@ -29,4 +29,9 @@ public class Account {
     @OneToMany
     private List<BoughtBook> boughtBooks;
     private Role role;
+
+    public void buyBook(double price, BoughtBook book){
+        this.amount -= price;
+        this.boughtBooks.add(book);
+    }
 }

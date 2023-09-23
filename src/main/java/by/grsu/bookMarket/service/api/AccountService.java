@@ -8,5 +8,5 @@ public interface AccountService {
     AccountAuthResponse registration(AccountAuthRequest accountDTO);
     AccountAuthResponse authentication(AccountAuthRequest accountDTO);
     AccountMainInfoDTO getMainInfo(String mail);
-    void buyBook(String bookName);
+    String buyBook(String mail, String bookName);
 }
