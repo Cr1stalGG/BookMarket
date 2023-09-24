@@ -1,5 +1,6 @@
 package by.grsu.bookMarket.controller;
 
+import by.grsu.bookMarket.entity.dto.accountDTO.AccountAddAmountRequest;
 import by.grsu.bookMarket.entity.dto.accountDTO.AccountMainInfoDTO;
 import by.grsu.bookMarket.entity.dto.authorDTO.AuthorCreationDTO;
 import by.grsu.bookMarket.entity.dto.bookDTO.BookCreationDTO;
@@ -18,6 +19,10 @@ public class AccountController {
     @GetMapping()
     public AccountMainInfoDTO getAccount(@PathVariable String mail){
         return accountService.getMainInfo(mail);
+    }
+
+    public String addAmount(@RequestBody AccountAddAmountRequest addAmountRequest){
+        return accountService.addAmount(addAmountRequest);
     }
 
     @PostMapping("/buy-book/{bookName}")

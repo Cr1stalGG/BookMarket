@@ -3,6 +3,7 @@ package by.grsu.bookMarket.service;
 import by.grsu.bookMarket.entity.Account;
 import by.grsu.bookMarket.entity.Book;
 import by.grsu.bookMarket.entity.BoughtBook;
+import by.grsu.bookMarket.entity.dto.accountDTO.AccountAddAmountRequest;
 import by.grsu.bookMarket.entity.dto.accountDTO.AccountMainInfoDTO;
 import by.grsu.bookMarket.entity.dto.convertor.AccountDTOConvertor;
 import by.grsu.bookMarket.entity.dto.convertor.BookDTOConvertor;
@@ -56,6 +57,17 @@ public class AccountServiceImpl implements AccountService {
         account.buyBook(book.getPrice(), boughtBook);
 
         boughtBookRepository.save(boughtBook);
+        accountRepository.save(account);
+
+        return "Success";
+    }
+
+    @Override
+    public String addAmount(AccountAddAmountRequest addAmountRequest) {
+        Account account = accountRepository.findAccountByMail(addAmountRequest.getMail());
+
+        account.addAmount(addAmountRequest.getAmount());
+
         accountRepository.save(account);
 
         return "Success";

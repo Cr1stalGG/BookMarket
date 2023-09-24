@@ -34,4 +34,8 @@ public class Account {
         this.amount -= price;
         this.boughtBooks.add(book);
     }
+
+    public void addAmount(double amount) {
+        this.amount += amount;
+    }
 }
