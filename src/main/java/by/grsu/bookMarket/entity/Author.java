@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Author extends BaseEntity<Long>{
-    private long id;
     private String name;
     private String description;
 }
