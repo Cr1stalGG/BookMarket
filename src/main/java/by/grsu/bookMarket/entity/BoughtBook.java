@@ -1,9 +1,11 @@
 package by.grsu.bookMarket.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
@@ -13,10 +15,8 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class BoughtBook {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@EqualsAndHashCode(callSuper = true)
+public class BoughtBook extends BaseEntity<Long>{
     private String name;
     private String description;
     @ManyToOne

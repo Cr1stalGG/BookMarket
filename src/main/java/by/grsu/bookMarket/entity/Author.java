@@ -1,12 +1,10 @@
 package by.grsu.bookMarket.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -14,9 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Author {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@EqualsAndHashCode(callSuper = true)
+public class Author extends BaseEntity<Long>{
     private long id;
     private String name;
     private String description;
