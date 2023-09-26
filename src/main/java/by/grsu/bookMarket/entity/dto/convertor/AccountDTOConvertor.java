@@ -21,7 +21,7 @@ public class AccountDTOConvertor {
     public AccountMainInfoDTO convertEntityToDTO(Account account){
         return AccountMainInfoDTO.builder()
                 .mail(account.getMail())
-                .amount(account.getAmount())
+                .amount(account.getCash())
                 .boughtBooks(account.getBoughtBooks().stream().map(boughtBookDTOConvertor :: convertEntityToDTO).toList())
                 .build();
     }

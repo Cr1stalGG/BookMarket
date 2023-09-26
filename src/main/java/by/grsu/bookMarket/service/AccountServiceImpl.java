@@ -7,14 +7,21 @@ import by.grsu.bookMarket.entity.dto.accountDTO.AccountAddAmountRequest;
 import by.grsu.bookMarket.entity.dto.accountDTO.AccountMainInfoDTO;
 import by.grsu.bookMarket.entity.dto.convertor.AccountDTOConvertor;
 import by.grsu.bookMarket.entity.dto.convertor.BookDTOConvertor;
+import by.grsu.bookMarket.entity.enumirations.Role;
 import by.grsu.bookMarket.repository.AccountRepository;
 import by.grsu.bookMarket.repository.BookRepository;
 import by.grsu.bookMarket.repository.BoughtBookRepository;
 import by.grsu.bookMarket.security.authDTO.AccountAuthRequest;
 import by.grsu.bookMarket.security.authDTO.AccountAuthResponse;
+import by.grsu.bookMarket.security.jwt.JwtService;
 import by.grsu.bookMarket.service.api.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,14 +34,33 @@ public class AccountServiceImpl implements AccountService {
 
     private final BoughtBookRepository boughtBookRepository;
 
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+
     @Override
     public AccountAuthResponse registration(AccountAuthRequest accountDTO) {
-        return null;
+        Account account = Account.builder()
+                .mail(accountDTO.getMail())
+                .password(passwordEncoder.encode(accountDTO.getPassword()))
+                .role(Role.USER)
+                .build();
+
+        accountRepository.save(account);
+
+        var jwtToken = jwtService.generateToken(account);
+
+        return AccountAuthResponse.builder().token(jwtToken).build();
     }
 
     @Override
     public AccountAuthResponse authentication(AccountAuthRequest accountDTO) {
-        return null;
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(accountDTO.getMail(), accountDTO.getPassword()));
+
+        Account user = Optional.ofNullable(accountRepository.findAccountByMail(accountDTO.getMail())).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
+
+        return AccountAuthResponse.builder().token(jwtToken).build();
     }
 
     @Override
@@ -48,7 +74,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = accountRepository.findAccountByMail(mail);
         BoughtBook boughtBook = bookDTOConvertor.convertBookToBoughtBook(book);
 
-        if((book.getPrice() > account.getAmount()))
+        if((book.getPrice() > account.getCash()))
             return "Buying a book failed. U have no money to do this.";
 
         if(!book.buyOne())
