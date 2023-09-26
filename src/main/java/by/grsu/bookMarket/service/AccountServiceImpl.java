@@ -80,7 +80,8 @@ public class AccountServiceImpl implements AccountService {
         if(!book.buyOne())
             bookRepository.deleteBookByName(bookName);
 
-        account.buyBook(book.getPrice(), boughtBook);
+        account.setCash(account.getCash() - book.getPrice());
+        account.getBoughtBooks().add(boughtBook);
 
         boughtBookRepository.save(boughtBook);
         accountRepository.save(account);
@@ -92,7 +93,7 @@ public class AccountServiceImpl implements AccountService {
     public String addAmount(AccountAddAmountRequest addAmountRequest) {
         Account account = accountRepository.findAccountByMail(addAmountRequest.getMail());
 
-        account.addAmount(addAmountRequest.getAmount());
+        account.setCash(account.getCash() + addAmountRequest.getAmount());
 
         accountRepository.save(account);
 

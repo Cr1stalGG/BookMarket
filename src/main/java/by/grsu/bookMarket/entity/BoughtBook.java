@@ -22,5 +22,4 @@ public class BoughtBook extends BaseEntity<Long>{
     @ManyToOne
     private Author author;
     private Date date;
-
 }

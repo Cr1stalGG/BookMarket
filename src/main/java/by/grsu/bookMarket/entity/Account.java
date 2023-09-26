@@ -26,15 +26,6 @@ public class Account extends BaseEntity<Long> implements UserDetails {
     private List<BoughtBook> boughtBooks;
     private RoleConstant role;
 
-    public void buyBook(double price, BoughtBook book){
-        this.cash -= price;
-        this.boughtBooks.add(book);
-    }
-
-    public void addAmount(double amount) {
-        this.cash += amount;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(this.role.name()));
