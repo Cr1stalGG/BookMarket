@@ -22,6 +22,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<BookMainInfoDTO> find(String query) {
-        return bookRepository.find(query).stream().map(bookDTOConvertor :: convertEntityToDTO).toList();
+        return bookRepository.findBookByNameLike(query).stream().map(bookDTOConvertor :: convertEntityToDTO).toList();
     }
 }
