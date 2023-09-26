@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class BookMainInfoDTO {
     private String name;
     private String description;
-    private AuthorMainInfoDTO author;
+    private List<AuthorMainInfoDTO> authors;
     private int count;
     private double price;
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -15,6 +16,6 @@ import java.sql.Date;
 public class BoughtBookMainInfoDTO {
     private String name;
     private String description;
-    private AuthorMainInfoDTO author;
+    private List<AuthorMainInfoDTO> authors;
     private Date date;
 }

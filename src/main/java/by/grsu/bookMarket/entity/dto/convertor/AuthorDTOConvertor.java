@@ -7,17 +7,18 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class AuthorDTOConvertor {
-    public Author convertCreationDTOToEntity(AuthorCreationDTO authorDTO){
+    public Author convertCreationDTOToEntity(AuthorCreationDTO source){
         return Author.builder()
-                .name(authorDTO.getName())
-                .description(authorDTO.getDescription())
+                .name(source.getName())
+                .description(source.getDescription())
                 .build();
     }
 
-    public AuthorMainInfoDTO convertEntityToDTO(Author author){
+    public AuthorMainInfoDTO convertEntityToDTO(Author source){
         return AuthorMainInfoDTO.builder()
-                .name(author.getName())
-                .description(author.getDescription())
+                .name(source.getName())
+                .description(source.getDescription())
+                .books(source.getBooks().stream().map(BookDTOConvertor::convertEntityToDTO).toList())
                 .build();
     }
 }

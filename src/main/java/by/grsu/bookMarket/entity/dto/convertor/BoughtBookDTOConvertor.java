@@ -6,12 +6,12 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class BoughtBookDTOConvertor {
-    public BoughtBookMainInfoDTO convertEntityToDTO(BoughtBook boughtBook){
+    public BoughtBookMainInfoDTO convertEntityToDTO(BoughtBook source){
         return BoughtBookMainInfoDTO.builder()
-                .name(boughtBook.getName())
-                .description(boughtBook.getDescription())
-                .author(AuthorDTOConvertor.convertEntityToDTO(boughtBook.getAuthor()))
-                .date(boughtBook.getDate())
+                .name(source.getName())
+                .description(source.getDescription())
+                .authors(source.getAuthors().stream().map(AuthorDTOConvertor::convertEntityToDTO).toList())
+                .date(source.getDate())
                 .build();
     }
 }

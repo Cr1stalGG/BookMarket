@@ -12,29 +12,29 @@ import java.time.LocalDate;
 
 @UtilityClass
 public class BookDTOConvertor {
-    public Book convertCreationDTOToEntity(BookCreationDTO bookDTO){
+    public Book convertCreationDTOToEntity(BookCreationDTO source){
         return Book.builder()
-                .name(bookDTO.getName())
-                .description(bookDTO.getDescription())
-                .author(bookDTO.getAuthor())
-                .price(bookDTO.getPrice())
+                .name(source.getName())
+                .description(source.getDescription())
+                .authors(source.getAuthors())
+                .price(source.getPrice())
                 .build();
     }
 
-    public BookMainInfoDTO convertEntityToDTO(Book book){
+    public BookMainInfoDTO convertEntityToDTO(Book source){
         return BookMainInfoDTO.builder()
-                .name(book.getName())
-                .description(book.getDescription())
-                .author(AuthorDTOConvertor.convertEntityToDTO(book.getAuthor()))
-                .price(book.getPrice())
+                .name(source.getName())
+                .description(source.getDescription())
+                .authors(source.getAuthors().stream().map(AuthorDTOConvertor::convertEntityToDTO).toList())
+                .price(source.getPrice())
                 .build();
     }
 
-    public BoughtBook convertBookToBoughtBook(Book book){
+    public BoughtBook convertBookToBoughtBook(Book source){
         return BoughtBook.builder()
-                .name(book.getName())
-                .description(book.getDescription())
-                .author(book.getAuthor())
+                .name(source.getName())
+                .description(source.getDescription())
+                .authors(source.getAuthors())
                 .date(Date.valueOf(LocalDate.now()))
                 .build();
     }
