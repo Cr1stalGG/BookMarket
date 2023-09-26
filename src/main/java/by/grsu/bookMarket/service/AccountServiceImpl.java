@@ -7,7 +7,7 @@ import by.grsu.bookMarket.entity.dto.accountDTO.AccountAddAmountRequest;
 import by.grsu.bookMarket.entity.dto.accountDTO.AccountMainInfoDTO;
 import by.grsu.bookMarket.entity.dto.convertor.AccountDTOConvertor;
 import by.grsu.bookMarket.entity.dto.convertor.BookDTOConvertor;
-import by.grsu.bookMarket.entity.enumirations.Role;
+import by.grsu.bookMarket.entity.enumirations.RoleConstant;
 import by.grsu.bookMarket.repository.AccountRepository;
 import by.grsu.bookMarket.repository.BookRepository;
 import by.grsu.bookMarket.repository.BoughtBookRepository;
@@ -43,7 +43,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = Account.builder()
                 .mail(accountDTO.getMail())
                 .password(passwordEncoder.encode(accountDTO.getPassword()))
-                .role(Role.USER)
+                .role(RoleConstant.USER)
                 .build();
 
         accountRepository.save(account);

@@ -1,7 +1,7 @@
 package by.grsu.bookMarket.entity;
 
 
-import by.grsu.bookMarket.entity.enumirations.Role;
+import by.grsu.bookMarket.entity.enumirations.RoleConstant;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.*;
@@ -24,7 +24,7 @@ public class Account extends BaseEntity<Long> implements UserDetails {
     private double cash;
     @OneToMany
     private List<BoughtBook> boughtBooks;
-    private Role role;
+    private RoleConstant role;
 
     public void buyBook(double price, BoughtBook book){
         this.cash -= price;

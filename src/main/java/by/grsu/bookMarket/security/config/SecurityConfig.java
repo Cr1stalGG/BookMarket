@@ -1,6 +1,6 @@
 package by.grsu.bookMarket.security.config;
 
-import by.grsu.bookMarket.entity.enumirations.Role;
+import by.grsu.bookMarket.entity.enumirations.RoleConstant;
 import by.grsu.bookMarket.security.jwt.JwtAuthFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +23,8 @@ public class SecurityConfig {
     @Bean
     public   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests().requestMatchers("/sign/*").permitAll();
-        http.authorizeHttpRequests().requestMatchers("/accounts/*").hasAuthority(String.valueOf(Role.USER));
-        http.authorizeHttpRequests().requestMatchers("/admins/*").hasAuthority(String.valueOf(Role.ADMIN));
+        http.authorizeHttpRequests().requestMatchers("/accounts/*").hasAuthority(String.valueOf(RoleConstant.USER));
+        http.authorizeHttpRequests().requestMatchers("/admins/*").hasAuthority(String.valueOf(RoleConstant.ADMIN));
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.logout().logoutUrl("/logout");
 
