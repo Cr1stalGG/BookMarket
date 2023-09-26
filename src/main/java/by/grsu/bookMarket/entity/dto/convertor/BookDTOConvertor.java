@@ -23,7 +23,6 @@ public class BookDTOConvertor {
                 .name(bookDTO.getName())
                 .description(bookDTO.getDescription())
                 .author(authorRepository.findAuthorByName(bookDTO.getAuthorName()))
-                .count(bookDTO.getCount())
                 .price(bookDTO.getPrice())
                 .build();
     }
@@ -33,8 +32,7 @@ public class BookDTOConvertor {
                 .name(book.getName())
                 .description(book.getDescription())
                 .author(authorDTOConvertor.convertEntityToDTO(book.getAuthor()))
-                .count(book.getCount())
-                .price(book.getCount())
+                .price(book.getPrice())
                 .build();
     }
 

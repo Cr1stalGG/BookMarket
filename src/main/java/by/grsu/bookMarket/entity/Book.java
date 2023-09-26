@@ -19,12 +19,5 @@ public class Book extends BaseEntity<Long>{
     private String description;
     @ManyToOne
     private Author author;
-    private int count;
     private double price;
-
-    public boolean buyOne(){
-        this.count--;
-
-        return this.count != 0;
-    }
 }

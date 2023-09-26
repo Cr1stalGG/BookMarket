@@ -77,9 +77,6 @@ public class AccountServiceImpl implements AccountService {
         if((book.getPrice() > account.getCash()))
             return "Buying a book failed. U have no money to do this.";
 
-        if(!book.buyOne())
-            bookRepository.deleteBookByName(bookName);
-
         account.setCash(account.getCash() - book.getPrice());
         account.getBoughtBooks().add(boughtBook);
 
