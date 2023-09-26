@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountServiceImpl accountService;
-    private final AdminServiceImpl adminService;
 
     @GetMapping()
     public AccountMainInfoDTO getAccount(@PathVariable String mail){
         return accountService.getMainInfo(mail);
     }
+
+    @PostMapping("/amount")
 
     public String addAmount(@RequestBody AccountAddAmountRequest addAmountRequest){
         return accountService.addAmount(addAmountRequest);
