@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BookService {
     BookMainInfoDTO findByName(String name);
-    List<BookMainInfoDTO> find(String query);
+    List<BookMainInfoDTO> find(String name);
 }

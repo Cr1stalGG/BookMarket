@@ -16,9 +16,9 @@ import java.util.List;
 public class BookController {
     private final BookServiceImpl bookService;
 
-    @GetMapping("/{query}")
-    public List<BookMainInfoDTO> find(@PathVariable String query){
-        return bookService.find(query);
+    @GetMapping("/{name}")
+    public List<BookMainInfoDTO> find(@PathVariable String name){
+        return bookService.find(name);
     }
 
 
