@@ -3,9 +3,9 @@ package by.grsu.bookMarket.entity.dto.convertor;
 import by.grsu.bookMarket.entity.Author;
 import by.grsu.bookMarket.entity.dto.authorDTO.AuthorCreationDTO;
 import by.grsu.bookMarket.entity.dto.authorDTO.AuthorMainInfoDTO;
-import org.springframework.stereotype.Component;
+import lombok.experimental.UtilityClass;
 
-@Component
+@UtilityClass
 public class AuthorDTOConvertor {
     public Author convertCreationDTOToEntity(AuthorCreationDTO authorDTO){
         return Author.builder()

@@ -1,5 +1,6 @@
 package by.grsu.bookMarket.entity.dto.bookDTO;
 
+import by.grsu.bookMarket.entity.Author;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class BookCreationDTO {
     private String name;
     private String description;
-    private String AuthorName;
+    private Author author;
     private int count;
     private double price;
 }

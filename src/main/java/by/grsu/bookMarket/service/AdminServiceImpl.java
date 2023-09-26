@@ -14,14 +14,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
     private final AuthorRepository authorRepository;
-    private final AuthorDTOConvertor authorDTOConvertor;
 
     private final BookRepository bookRepository;
-    private final BookDTOConvertor bookDTOConvertor;
 
     @Override
     public void addAuthor(AuthorCreationDTO authorDTO) {
-        authorRepository.save(authorDTOConvertor.convertCreationDTOToEntity(authorDTO));
+        authorRepository.save(AuthorDTOConvertor.convertCreationDTOToEntity(authorDTO));
     }
 
     @Override
@@ -31,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void addBook(BookCreationDTO bookDTO) {
-        bookRepository.save(bookDTOConvertor.convertCreationDTOToEntity(bookDTO));
+        bookRepository.save(BookDTOConvertor.convertCreationDTOToEntity(bookDTO));
     }
 
     @Override

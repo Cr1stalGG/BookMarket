@@ -27,10 +27,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
-    private final AccountDTOConvertor accountDTOConvertor;
 
     private final BookRepository bookRepository;
-    private final BookDTOConvertor bookDTOConvertor;
 
     private final BoughtBookRepository boughtBookRepository;
 
@@ -65,14 +63,14 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountMainInfoDTO getMainInfo(String mail) {
-        return accountDTOConvertor.convertEntityToDTO(accountRepository.findAccountByMail(mail));
+        return AccountDTOConvertor.convertEntityToDTO(accountRepository.findAccountByMail(mail));
     }
 
     @Override
     public String buyBook(String mail, String bookName) {
         Book book = bookRepository.findBookByName(bookName);
         Account account = accountRepository.findAccountByMail(mail);
-        BoughtBook boughtBook = bookDTOConvertor.convertBookToBoughtBook(book);
+        BoughtBook boughtBook = BookDTOConvertor.convertBookToBoughtBook(book);
 
         if((book.getPrice() > account.getCash()))
             return "Buying a book failed. U have no money to do this.";
