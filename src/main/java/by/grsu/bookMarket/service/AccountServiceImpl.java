@@ -62,14 +62,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountMainInfoDTO getMainInfo(String mail) {
-        return AccountDTOConvertor.convertEntityToDTO(accountRepository.findAccountByMail(mail));
+    public AccountMainInfoDTO getMainInfo(long id) {
+        return AccountDTOConvertor.convertEntityToDTO(accountRepository.findAccountById(id));
     }
 
     @Override
-    public String buyBook(String mail, String bookName) {
+    public String buyBook(long id, String bookName) {
         Book book = bookRepository.findBookByName(bookName);
-        Account account = accountRepository.findAccountByMail(mail);
+        Account account = accountRepository.findAccountById(id);
         BoughtBook boughtBook = BookDTOConvertor.convertBookToBoughtBook(book);
 
         if((book.getPrice() > account.getCash()))

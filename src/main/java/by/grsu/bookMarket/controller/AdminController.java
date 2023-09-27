@@ -17,9 +17,9 @@ public class AdminController {
         adminService.addAuthor(authorDTO);
     }
 
-    @DeleteMapping("/author/{authorName}")
-    public void deleteAuthor(@PathVariable String authorName){
-        adminService.deleteAuthor(authorName);
+    @DeleteMapping("/author/{id}")
+    public void deleteAuthor(@PathVariable long id){
+        adminService.deleteAuthor(id);
     }
 
     @PostMapping("/book")
@@ -27,8 +27,8 @@ public class AdminController {
         adminService.addBook(bookDTO);
     }
 
-    @DeleteMapping("/book/{bookName}")
-    public void deleteBook(@PathVariable String bookName){
-        adminService.deleteBook(bookName);
+    @DeleteMapping("/book/{id}")
+    public void deleteBook(@PathVariable long id){
+        adminService.deleteBook(id);
     }
 }

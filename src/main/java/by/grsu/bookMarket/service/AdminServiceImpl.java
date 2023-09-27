@@ -24,8 +24,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteAuthor(String name) {
-        authorRepository.deleteAuthorByName(name);
+    public void deleteAuthor(long id) {
+        authorRepository.deleteAuthorById(id);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void deleteBook(String name) {
-        bookRepository.deleteBookByName(name);
+    public void deleteBook(long id) {
+        bookRepository.deleteBookById(id);
     }
 }

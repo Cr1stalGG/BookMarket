@@ -8,7 +8,7 @@ import by.grsu.bookMarket.security.authDTO.AccountAuthResponse;
 public interface AccountService {
     AccountAuthResponse registration(AccountAuthRequest accountDTO);
     AccountAuthResponse authentication(AccountAuthRequest accountDTO);
-    AccountMainInfoDTO getMainInfo(String mail);
-    String buyBook(String mail, String bookName);
+    AccountMainInfoDTO getMainInfo(long id);
+    String buyBook(long id, String bookName);
     String addAmount(AccountAddAmountRequest addAmountRequest);
 }
