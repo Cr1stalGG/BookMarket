@@ -1,10 +1,15 @@
 package by.grsu.bookMarket.entity;
 
 
-import by.grsu.bookMarket.entity.enumirations.RoleConstant;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,11 +29,12 @@ public class Account extends BaseEntity<Long> implements UserDetails {
     private double cash;
     @OneToMany
     private List<BoughtBook> boughtBooks;
-    private List<RoleConstant> roles;
+    @ManyToMany(fetch = FetchType.EAGER )
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream().map(x -> new SimpleGrantedAuthority(x.toString())).toList();
+        return roles.stream().map(x -> new SimpleGrantedAuthority(x.getRole().toString())).toList();
     }
 
     @Override

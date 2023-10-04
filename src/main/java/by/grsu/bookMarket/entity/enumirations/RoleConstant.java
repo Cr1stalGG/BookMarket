@@ -1,6 +1,6 @@
 package by.grsu.bookMarket.entity.enumirations;
 
 public enum RoleConstant {
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }
