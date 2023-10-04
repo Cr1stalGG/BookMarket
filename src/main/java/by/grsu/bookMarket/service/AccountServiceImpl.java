@@ -22,6 +22,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = Account.builder()
                 .mail(accountDTO.getMail())
                 .password(passwordEncoder.encode(accountDTO.getPassword()))
-                .role(RoleConstant.USER)
+                .roles(List.of(RoleConstant.USER))
                 .build();
 
         accountRepository.save(account);

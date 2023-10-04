@@ -24,11 +24,11 @@ public class Account extends BaseEntity<Long> implements UserDetails {
     private double cash;
     @OneToMany
     private List<BoughtBook> boughtBooks;
-    private RoleConstant role;
+    private List<RoleConstant> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role.name()));
+        return roles.stream().map(x -> new SimpleGrantedAuthority(x.toString())).toList();
     }
 
     @Override

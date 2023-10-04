@@ -21,7 +21,7 @@ public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     @Bean
-    public   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests().requestMatchers("/sign/*").permitAll();
         http.authorizeHttpRequests().requestMatchers("/accounts/*").hasAuthority(String.valueOf(RoleConstant.USER));
         http.authorizeHttpRequests().requestMatchers("/admins/*").hasAuthority(String.valueOf(RoleConstant.ADMIN));
