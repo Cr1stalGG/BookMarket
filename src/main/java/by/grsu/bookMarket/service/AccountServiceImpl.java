@@ -3,6 +3,7 @@ package by.grsu.bookMarket.service;
 import by.grsu.bookMarket.entity.Account;
 import by.grsu.bookMarket.entity.Book;
 import by.grsu.bookMarket.entity.BoughtBook;
+import by.grsu.bookMarket.entity.Role;
 import by.grsu.bookMarket.entity.dto.accountDTO.AccountAddAmountRequest;
 import by.grsu.bookMarket.entity.dto.accountDTO.AccountMainInfoDTO;
 import by.grsu.bookMarket.entity.dto.convertor.AccountDTOConvertor;
@@ -12,6 +13,7 @@ import by.grsu.bookMarket.repository.BookRepository;
 import by.grsu.bookMarket.repository.BoughtBookRepository;
 import by.grsu.bookMarket.security.authDTO.AccountAuthRequest;
 import by.grsu.bookMarket.security.authDTO.AccountAuthResponse;
+import by.grsu.bookMarket.security.config.AccountUserDetailsConfig;
 import by.grsu.bookMarket.security.jwt.JwtService;
 import by.grsu.bookMarket.service.api.AccountService;
 import jakarta.transaction.Transactional;
@@ -21,6 +23,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,11 +43,12 @@ public class AccountServiceImpl implements AccountService {
         Account account = Account.builder()
                 .mail(accountDTO.getMail())
                 .password(passwordEncoder.encode(accountDTO.getPassword()))
+                .roles(List.of(new Role()))
                 .build();
 
         accountRepository.save(account);
 
-        var jwtToken = jwtService.generateToken(account);
+        var jwtToken = jwtService.generateToken(new AccountUserDetailsConfig(account));
 
         return AccountAuthResponse.builder().token(jwtToken).build();
     }
@@ -54,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(accountDTO.getMail(), accountDTO.getPassword()));
 
         Account user = Optional.ofNullable(accountRepository.findAccountByMail(accountDTO.getMail())).orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
+        var jwtToken = jwtService.generateToken(new AccountUserDetailsConfig(user));
 
         return AccountAuthResponse.builder().token(jwtToken).build();
     }

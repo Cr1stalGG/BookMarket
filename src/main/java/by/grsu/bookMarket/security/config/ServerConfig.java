@@ -14,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.Optional;
-
 @Configuration
 @RequiredArgsConstructor
 public class ServerConfig {
@@ -26,8 +24,12 @@ public class ServerConfig {
         return new UserDetailsService() {
             @Override
             public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-                Optional<Account> account = Optional.ofNullable(accountRepository.findAccountByMail(mail));
-                return account.orElseThrow(() -> new UsernameNotFoundException("user not found " + mail));
+                Account account = accountRepository.findAccountByMail(mail);
+
+                if (account == null)
+                    throw new UsernameNotFoundException(mail);
+
+                return new AccountUserDetailsConfig(account);
             }
         };
     }
